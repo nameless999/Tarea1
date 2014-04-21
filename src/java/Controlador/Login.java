@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -31,15 +32,28 @@ public class Login extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
+            HttpSession session=request.getSession();
+            request.getSession().setAttribute("Usuario", request.getParameter("Nombre"));
 
-            Registro nRegistro=new Registro();
+            Registro pro= new Registro();
+            out.print(session.getAttribute("Usuario"));
 
-            String Nombre = request.getParameter("Nombre").toUpperCase();
-            String Password = request.getParameter("Password").toUpperCase();
+            for( Registro temp: pro.Login()){
+                out.print(session.getAttribute("Usuario"));
+                if(session.getAttribute("Nombre").equals(temp.getNombre()) && session.getAttribute("Password").equals(temp.getNombre())){
+                    response.sendRedirect("Views/Administrador/Administrador.jsp");
+                }
 
-            nRegistro.Ingresar(Nombre,Password);
+                else if(!session.getAttribute("Nombre").equals(temp.getNombre())){
 
-            response.sendRedirect("index.jsp");
+                    response.sendRedirect("index.jsp");
+                }
+
+                else{
+                    out.print("Error al iniciar sesión");
+                    response.sendRedirect("index.jsp");
+                }
+            }
 
         } finally { 
             out.close();

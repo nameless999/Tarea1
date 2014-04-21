@@ -16,19 +16,23 @@
     <body>
         <h1>Ingresar Vendedor</h1>
 
-                <form action="ingresousuario" method="post" >
-
+       <form action="Vendedor" method="post" >
             <div class="IngresoUsuario">
                 <p>Ingrese rut:</p>
-                <p><input type="text" value="" name="rut"></p>
+                <p><input type="text" value="" name="rut" placeholder="Ej: 18664654-1"></p>
                 <p>Ingrese contraseña</p>
-                <p><input type="password" value="" name="contrasenna"></p>
-                <p>Ingrese contraseña</p>
-                <p><input type="password" value="" name="nombre"></p>
-                <p> <input type="submit" value="ingresousuario" name="ingresousuario"></p>
-
+                <p><input type="password" value="" name="password"></p>
+                <p>Repetir contraseña</p>
+                <p><input type="password" value="" name="repassword"></p>
+                <p> <input type="submit" value="Vendedor" name="Finalizar"></p>
             </div>
-
         </form>
+        <% 
+        String Rut = request.getParameter("rut");
+        
+        if(Rut.length() == 10 || Rut.indexOf('-') == '-'){
+
+        }
+
     </body>
 </html>

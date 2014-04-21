@@ -5,24 +5,40 @@
         <servlet-class>Controlador.Login</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Administrador</servlet-name>
-        <servlet-class>Controlador.Administrador</servlet-class>
+        <servlet-name>NewServlet</servlet-name>
+        <servlet-class>Controlador.Session.NewServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Vendedor</servlet-name>
-        <servlet-class>Controlador.Vendedor</servlet-class>
+        <servlet-name>SetAttrtibute</servlet-name>
+        <servlet-class>Controlador.Session.SetAttrtibute</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>closeSession</servlet-name>
+        <servlet-class>Controlador.Session.closeSession</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getAttribute</servlet-name>
+        <servlet-class>Controlador.Session.getAttribute</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Administrador</servlet-name>
-        <url-pattern>/Administrador</url-pattern>
+        <servlet-name>NewServlet</servlet-name>
+        <url-pattern>/NewServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Vendedor</servlet-name>
-        <url-pattern>/Vendedor</url-pattern>
+        <servlet-name>SetAttrtibute</servlet-name>
+        <url-pattern>/SetAttrtibute</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>closeSession</servlet-name>
+        <url-pattern>/closeSession</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getAttribute</servlet-name>
+        <url-pattern>/getAttribute</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
