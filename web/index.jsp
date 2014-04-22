@@ -25,13 +25,15 @@
                     <h1 id="Titulo">Bievenido a Pepe's Works</h1>
                 </center>
                 <%
-                    if(session.getAttribute("Usuario") != null)
+                    if(session.getAttribute("tipoUsuario") != null)
                     { %>
 
                         <div id="status">
 
                             <p><b>Bienvenido: </b> <% out.print(session.getAttribute("Usuario"));  %> </p>
-                            <center><a href="Views/Session/closeSession.jsp"> Logout </a></center>
+                            <center><a href="Controller/Session/closeSession.jsp"> Logout </a>
+                                <a href="Views/Administrador/Administrador.jsp"> Administrador </a>
+                            </center>
 
                         </div>
 
@@ -39,13 +41,14 @@
 
             </div>
 
- 
-             <div id="contenido">
+                
+              <div id="contenido">
                 <div id="formulario">
                     <center>
                         <h2>Ingrese sus datos</h2>
                     </center>
-                    <form id="formularios" action="Login" method="post">
+
+                    <form id="formularios" action="Controller/Session/tipoUsuario.jsp" method="post">
                         <center>
                             <label>Nombre</label>
                                 <input id="FormName" name= "Nombre" type="text" />
@@ -56,9 +59,10 @@
                             <input id="campo3" name="accion" type="submit" value="Login" />
                         </center>
                     </form>
-                         
+
                 </div> <!-- Formulario -->
             </div> <!-- Contenido -->
+     
             
         </div> <!-- Wrap -->
 

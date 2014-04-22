@@ -14,19 +14,43 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <center>
         <h1> Menú Administrador </h1>
-            <h2>Bienvenido <%= "Nombre" %> <</h2>
+        <h2>Bienvenido <%= session.getAttribute("Usuario") %> </h2>
+        </center>
 
-            <a href="IngresarVendedor">Ingresar Vendedor</a>
+        <center>
 
-            <a href="IngresarCliente">Ingresar cliente</a>
+    <table border="1px">
+        <tbody>
 
-            <a href="AdminProducto">Administrar Producto</a>
+            <tr>
+                <td><h3>Ingresar Vendedor</h3></td>
+                <td><button type="submit"><a style='text-decoration:none';  href="IngrVendedor.jsp" >Continuar</a> </button></td>
+            </tr>
+            <tr>
+                <td><h3>Ingresar Cliente</h3></td>
+                <td><button type="submit"><a style='text-decoration:none';  href="IngrCliente.jsp" >Continuar</a> </button></td>
+            </tr>
+             <tr>
+                <td><h3>Administrar Productos</h3></td>
+                <td><button type="submit"><a style='text-decoration:none';  href="AdminProductos.jsp" >Continuar</a> </button></td>
+            </tr>
+             <tr>
+                <td><h3>Ingresar Compra</h3></td>
+                <td><button type="submit"><a style='text-decoration:none';  href="IngrCompra.jsp" >Continuar</a> </button></td>
+            </tr>
+             <tr>
+                <td><h3>Ingresar Venta</h3></td>
+                <td><button type="submit"><a style='text-decoration:none'; href="IngrVenta.jsp" >Continuar</a> </button></td>
+            </tr>
+            <tr>
+                <td><h3>Ver Venta a Clientes</h3></td>
+                <td><button type="submit"><a style='text-decoration:none'; href="VerVenClientes.jsp" >Continuar</a> </button></td>
+            </tr>
 
-            <a href="IngresarVenta">Ingresar Venta</a>
-
-            <a href="IngresarCompra">Ingresar Compra </a>
-
-            <a href="VerVentasClientes">Ver Ventas a Clientes</a>
+        </tbody>
+    </table>
+    </center>
     </body>
 </html>

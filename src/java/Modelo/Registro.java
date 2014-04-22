@@ -18,7 +18,7 @@ public class Registro
 
     private String nombre;
     private String password;
-    private String cargo;
+    private String tipoUsuario;
     private String nombreBD;
     private String passwordBD;
 
@@ -58,7 +58,7 @@ public void Ingresar(String nombre, String password){
    
  public Vector<Registro> Login(){
         Vector<Registro> vecPro=new Vector<Registro>();
-        String sql = "SELECT * FROM USUARIO ";
+        String sql = "SELECT * FROM USUARIOS ";
    try
         {
        
@@ -72,10 +72,11 @@ public void Ingresar(String nombre, String password){
                     Registro pro=new Registro();
                     pro.setNombre(rs.getString("nombre"));
                     pro.setPassword(rs.getString("contraseña"));
-                    pro.setCargo(rs.getString("cargo"));
+                    pro.setTipoUsuario(rs.getString("cargo"));
                     vecPro.add(pro);
                 }
         }catch(Exception ex){
+            ex.printStackTrace();
         }finally{
             try{
                 rs.close();
@@ -88,12 +89,12 @@ public void Ingresar(String nombre, String password){
         return vecPro;
     }
 
-    public String getCargo() {
-        return cargo;
+    public String getTipoUsuario() {
+        return tipoUsuario;
     }
 
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
     public String getNombre() {
