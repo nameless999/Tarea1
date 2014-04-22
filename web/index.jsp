@@ -17,7 +17,11 @@
     </head>
     <body>
 
-       
+       <%
+       String administrador = "administrador";
+       String vendedor = "vendedor";
+       String yes = "yes";
+       %>
         <div id="wrap">
 
             <div id="head">
@@ -29,12 +33,30 @@
                     { %>
 
                         <div id="status">
+                            <table border="1px">
+                                <tbody>
+                                    <tr>
+                                        <p id="bienvenido"><b>Bienvenido: </b> <% out.print(session.getAttribute("Usuario"));  %> </p>
+                                        <center>
+                                            <td>
+                                            <a id="logout"  href="Controller/Session/closeSession.jsp"> Logout </a>
+                                            </td>
+                                            <td>
+                                                <% if(session.getAttribute("tipoUsuario").equals("administrador")){ %>
+                                                    <a id="linkadmin" href="Views/Administrador/Administrador.jsp"> Administrador</a>
+                                               <% } %>
 
-                            <p><b>Bienvenido: </b> <% out.print(session.getAttribute("Usuario"));  %> </p>
-                            <center><a href="Controller/Session/closeSession.jsp"> Logout </a>
-                                <a href="Views/Administrador/Administrador.jsp"> Administrador </a>
-                            </center>
+                                               <%   if(session.getAttribute("tipoUsuario").equals("vendedor")) { %>
+                                                     <a id="linkadmin" href="Views/Vendedor/Vendedor.jsp"> Vendedor </a>
+                                               <%} %>
 
+
+                                            </td>
+                                        </center>
+                                       
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
 
                 <%  } %>
@@ -60,6 +82,20 @@
                         </center>
                     </form>
 
+                    <%
+                        if(session.getAttribute("Usuario") != null)
+                        {
+                            if(session.getAttribute("Inombre").equals("yes"))
+                            {
+                                out.print("Nombre incorrecto");
+                            }
+
+                            if(session.getAttribute("Ipassword").equals("yes"))
+                            {
+                                out.print("Password incorrecto");
+                            }
+                       }
+                    %>
                 </div> <!-- Formulario -->
             </div> <!-- Contenido -->
      
