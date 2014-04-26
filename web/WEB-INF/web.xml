@@ -20,6 +20,38 @@
         <servlet-name>getAttribute</servlet-name>
         <servlet-class>Controlador.Session.getAttribute</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>IngresarVendedor</servlet-name>
+        <servlet-class>Controller.IngresarVendedor</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IngresarCliente</servlet-name>
+        <servlet-class>Controller.IngresarCliente</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IngresarProducto</servlet-name>
+        <servlet-class>Controller.IngresarProducto</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IngresarCompra</servlet-name>
+        <servlet-class>Controller.IngresarCompra</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updateProducto</servlet-name>
+        <servlet-class>Controller.updateProducto</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NewServlet_1</servlet-name>
+        <servlet-class>Controller.NewServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditarProductos</servlet-name>
+        <servlet-class>Controller.EditarProductos</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>buscarProducto</servlet-name>
+        <servlet-class>Controller.buscarProducto</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -39,6 +71,38 @@
     <servlet-mapping>
         <servlet-name>getAttribute</servlet-name>
         <url-pattern>/getAttribute</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IngresarVendedor</servlet-name>
+        <url-pattern>/IngresarVendedor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IngresarCliente</servlet-name>
+        <url-pattern>/IngresarCliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IngresarProducto</servlet-name>
+        <url-pattern>/IngresarProducto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IngresarCompra</servlet-name>
+        <url-pattern>/IngresarCompra</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateProducto</servlet-name>
+        <url-pattern>/updateProducto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewServlet_1</servlet-name>
+        <url-pattern>/NewServlet_1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditarProductos</servlet-name>
+        <url-pattern>/EditarProductos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>buscarProducto</servlet-name>
+        <url-pattern>/buscarProducto</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

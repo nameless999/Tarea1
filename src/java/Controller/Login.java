@@ -5,7 +5,7 @@
 
 package Controller;
 
-import Modelo.Registro;
+import Modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -33,53 +35,53 @@ public class Login extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
 
-                 String administrador = "administrador";
-                 String vendedor = "vendedor";
                  HttpSession session = request.getSession();
-                 Registro Usuario= new Registro();
+                 Usuario user= new Usuario();
 
-                 for( Registro temp: Usuario.Login())
+
+                 if(user.ObtenerUsuario((String) session.getAttribute("Usuario"), (String) session.getAttribute("Contraseña")))
                  {
-                    
-                     if(session.getAttribute("Usuario").equals(temp.getNombre()) && session.getAttribute("Contraseña").equals(temp.getPassword()))
-                     {
-                        
-                            if(session.getAttribute("tipoUsuario") == null && temp.getTipoUsuario().equals("administrador"))
-                            {
-                                 session.setAttribute( "tipoUsuario",temp.getTipoUsuario());
-                                 response.sendRedirect("Views/Administrador/Administrador.jsp");
-                            }
-
-                            else if (session.getAttribute("tipoUsuario") == null && temp.getTipoUsuario().equals("vendedor"))
-                            {
-                                session.setAttribute( "tipoUsuario",temp.getTipoUsuario());
-                                response.sendRedirect("Views/Vendedor/Vendedor.jsp");
-                            }
-                     }
-
-                     if(!session.getAttribute("Usuario").equals(temp.getNombre()))
-                        {
-                            session.setAttribute("Inombre", "si");
-                            response.sendRedirect("index.jsp");
-                        }
-
-
-                    if(!session.getAttribute("Contraseña").equals(temp.getPassword()))
+                    if(user.getTipoUsuario().equals("administrador"))
                     {
-                        session.setAttribute("Ipassword", "si");
+                        session.setAttribute( "tipoUsuario", "administrador");
+                        response.sendRedirect("Views/Administrador/Administrador.jsp");
+                    }
+
+
+                    else
+                    {
+                        session.setAttribute( "tipoUsuario", "vendedor");
+                        response.sendRedirect("Views/Vendedor/Vendedor.jsp");
+                    }
+                 }
+
+                else
+                {
+                    if(!session.getAttribute("Usuario").equals(user.getNombre()))
+                    {
+
+                        session.setAttribute("Inombre", "yes");
                         response.sendRedirect("index.jsp");
                     }
 
-              }
+                    if(!session.getAttribute("Contraseña").equals(user.getPassword()))
+                    {
+
+                        session.setAttribute("Ipassword", "yes");
+                        response.sendRedirect("index.jsp");
+
+                    }
+                }
 
 
+               
 
-              }catch(Exception ex){
-                ex.printStackTrace();
-            } finally {
-                out.close();
-            }
+                 
+          }catch(Exception ex){
+        } finally {
+            out.close();
         }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

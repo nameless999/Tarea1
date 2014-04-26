@@ -6,7 +6,6 @@
 
 <%
 
-        String no = "no";
         session.setAttribute("tipoUsuario", null );
         session.setAttribute("Usuario", request.getParameter("Nombre"));
         session.setAttribute("Contraseña", request.getParameter("Password"));

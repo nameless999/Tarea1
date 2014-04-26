@@ -3,6 +3,9 @@
     Created on : Apr 16, 2014, 4:22:06 PM
     Author     : nameless999
 --%>
+<%@page import="Modelo.HoraFecha"%>
+<%@page import="Controller.HoraFecha"%>
+<%@page import="Modelo.Usuario"%>
 <%@page import="Modelo.Registro"%>
 <%@page contentType="java" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,6 +14,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Pepe's Works</title>
         <link href="Resources/css/index.css" rel="stylesheet" type="text/css">
+        <link href="Resources/css/Login/Login.css" rel="stylesheet" type="text/css">
         <link href="Views/Session/SetAttribute.jsp" >
         <link href="Registro.java">
 
@@ -18,15 +22,13 @@
     <body>
 
        <%
-       String administrador = "administrador";
-       String vendedor = "vendedor";
-       String yes = "yes";
+ 
        %>
         <div id="wrap">
 
             <div id="head">
                 <center>
-                    <h1 id="Titulo">Bievenido a Pepe's Works</h1>
+                     <h1 id="Titulo">Bievenido a Pepe's Works</h1>
                 </center>
                 <%
                     if(session.getAttribute("tipoUsuario") != null)
@@ -38,7 +40,7 @@
                                     <tr>
                                         <p id="bienvenido"><b>Bienvenido: </b> <% out.print(session.getAttribute("Usuario"));  %> </p>
                                         <center>
-                                            <td>
+                                                <td>
                                             <a id="logout"  href="Controller/Session/closeSession.jsp"> Logout </a>
                                             </td>
                                             <td>
@@ -62,45 +64,44 @@
                 <%  } %>
 
             </div>
+                <% HoraFecha Date= new HoraFecha();
+                   Date.main();
+                %>
+              			<div id="box">
+			<div class="elements">
+			<div class="avatar"></div>
 
-                
               <div id="contenido">
                 <div id="formulario">
-                    <center>
-                        <h2>Ingrese sus datos</h2>
-                    </center>
-
                     <form id="formularios" action="Controller/Session/tipoUsuario.jsp" method="post">
                         <center>
-                            <label>Nombre</label>
-                                <input id="FormName" name= "Nombre" type="text" />
+                                <input id="FormName" name= "Nombre" type="text" class="username" placeholder="Nombre"/>
 
-                            <label>Password</label>
-                                <input id="FormPass" name="Password" type="password" />
 
-                            <input id="campo3" name="accion" type="submit" value="Login" />
+                                <input id="FormPass" name="Password" type="password" class="password" placeholder="Contraseña"/>
+
+                            <input id="campo3" name="accion" type="submit" value="Entrar" class="submit"/>
+                     <div id="error">
+                     <%
+                        if(session.getAttribute("Usuario") != null)
+                        {
+                        
+                            if(session.getAttribute("Inombre").equals("yes") || session.getAttribute("Ipassword").equals("yes"))
+                            {%>
+                            <p id="error1">Nombre o password incorrecto. </p>
+                            <% } %>
+                       <% }%>
+                    </div>
                         </center>
                     </form>
 
-                    <%
-                        if(session.getAttribute("Usuario") != null)
-                        {
-                            if(session.getAttribute("Inombre").equals("yes"))
-                            {
-                                out.print("Nombre incorrecto");
-                            }
 
-                            if(session.getAttribute("Ipassword").equals("yes"))
-                            {
-                                out.print("Password incorrecto");
-                            }
-                       }
-                    %>
                 </div> <!-- Formulario -->
             </div> <!-- Contenido -->
-     
-            
-        </div> <!-- Wrap -->
 
+
+        </div> <!-- Wrap -->
+		</div>
+		</div>
     </body>
 </html>

@@ -3,24 +3,29 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ingresar Venta</title>
-    </head>
-    <body>
-        <center>
-            <h1>Ingresar Venta</h1>
-        </center>
-            <form id="IngrVenta" action="FunIngrCliente.jsp" method="post">
-                <center> 
-                    <label>Producto</label>
-                        <input id="IVProducto" name= "producto" type="text" />
-                        <% String IVProducto = request.getParameter("producto"); %> <br/>
-                    <label>Cantidad</label>
-                        <input id="IVCantidad" name= "cantidad" type="text" />
-                        <% String IVCantidad = request.getParameter("cantidad"); %> <br/>
-                    <input id="boton" name="accion" type="submit" value="Ingresar" /> <br/>
-                </center>
-            </form>
-        </center>
+        <link rel="stylesheet" type="text/css" href="../../Resources/css/Formulario/Formulario.css" />        		
+	<link href='http://fonts.googleapis.com/css?family=Questrial|Droid+Sans|Alice' rel='stylesheet' type='text/css'>   
+	<link href="../../Resources/css/index.css" rel="stylesheet" type="text/css">
 
-    </body>
-</html>
+	<title>Ingresar Venta</title>
+	<style>
+
+		</style>
+	    </head>
+	    <body>
+		<center>
+		    <h1>Ingresar Venta</h1>
+		</center>
+		<div id="content">
+		<center>
+		      <form action="FunIngrCliente.jsp" method="post"  autocomplete="on">
+				<p> <label for="producto" class="iconic producto" > Producto </label> <input type="text" name="Producto" id="producto"  required="required" placeholder="Ingrese el nombre"  /> </p>
+		                <p> <label for="cantidad" class="iconic cantidad"> Cantidad </label> <input type="text" name="Cantidad" id="cantidad" required="required" placeholder="Ingrese la cantidad" /> </p>
+			
+				<input type="submit" value="Agregar Venta" />
+
+		    </form>
+		</center>
+		</div>
+	    </body>
+	</html>
