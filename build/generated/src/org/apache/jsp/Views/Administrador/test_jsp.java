@@ -6,7 +6,7 @@ import javax.servlet.jsp.*;
 import javax.swing.JOptionPane;
 import Modelo.Registro;
 
-public final class IngrCompra_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class test_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -49,11 +49,11 @@ public final class IngrCompra_jsp extends org.apache.jasper.runtime.HttpJspBase
 
     Registro prod = new Registro();
     String htmlProductos = "";
-    int Contador = 0;
+    int np = 0;
     for(Registro temp: prod.MostrarProductos())
     {
-        Contador++;
-        htmlProductos+="<option value= \""+temp.getId_producto()+"\">"+temp.getNombreProducto()+"</option>\n";
+        np++;
+        htmlProductos+="<option value= \""+temp.getId_producto()+"\">"+temp.getNombre()+"</option>\n";
     }
     if (htmlProductos.equals("")){
         JOptionPane.showMessageDialog(null,"No existen Productos");
@@ -72,7 +72,7 @@ public final class IngrCompra_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("                    $(document).ready(function(){\n");
       out.write("                        if (");
-      out.print(Contador);
+      out.print(np);
       out.write(" == 1 ){\n");
       out.write("                            $( \"#botonAdd\" ).hide();\n");
       out.write("                        }\n");
@@ -103,11 +103,11 @@ public final class IngrCompra_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        $('#form').append('Precio: <input type=\"text\" class = \"precio\" name=\"precio'+i+'\" placeholder=\"Precio\"/>');\n");
       out.write("                        $('#form').append('<br />');\n");
       out.write("                        $('#form').append($('.submits'));\n");
-      out.write("                        $('#Contador').attr(\"value\", i);\n");
+      out.write("                        $('#np').attr(\"value\", i);\n");
       out.write("\n");
       out.write("                        i++;\n");
       out.write("                        if (i > ");
-      out.print(Contador);
+      out.print(np);
       out.write(" ){\n");
       out.write("                            $( \"#botonAdd\" ).hide();\n");
       out.write("                        }\n");
@@ -129,7 +129,7 @@ public final class IngrCompra_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t<br />\n");
       out.write("\t\t\t\tPrecio: <input type=\"text\" class = \"precio\" name=\"precio1\" placeholder=\"Precio\"/>\n");
       out.write("                                <br />\n");
-      out.write("                                <input type=\"hidden\" name =\"Contador\" value=\"1\" id=\"Contador\"/>\n");
+      out.write("                                <input type=\"hidden\" name =\"np\" value=\"1\" id=\"np\"/>\n");
       out.write("\t\t\t\t<input type=\"submit\" class = \"submits\" value=\"Finalizar\" />\n");
       out.write("\t\t\t</form>\n");
       out.write("                        <button id=\"botonAdd\"class=\"boton\" onclick=\"add()\">+Productos</button>\n");

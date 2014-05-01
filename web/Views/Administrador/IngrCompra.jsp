@@ -1,72 +1,128 @@
+<%@page import="javax.swing.JOptionPane"%>
 <%@page import="Modelo.Registro"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%
+    Registro prod = new Registro();
+    String htmlProductos = "";
+    int Contador = 0;
+    for(Registro temp: prod.MostrarProductos())
+    {
+        Contador++;
+        htmlProductos+="<option value= \""+temp.getId_producto()+"\">"+temp.getNombreProducto()+"</option>\n";
+    }
 
-        <link rel="stylesheet" type="text/css" href="../../Resources/css/Formulario/Formulario.css" />
+    if (htmlProductos.equals("")){
+        JOptionPane.showMessageDialog(null,"No existen Productos");
+        response.sendRedirect("agregarProductos.jsp");
+    }
+ %>
+<html>
+	<head>
+		   <link rel="stylesheet" type="text/css" href="../../Resources/css/Formulario/Formulario.css" />
         <link href='http://fonts.googleapis.com/css?family=Questrial|Droid+Sans|Alice' rel='stylesheet' type='text/css'>
         <link href="../../Resources/css/index.css" rel="stylesheet" type="text/css">
+                  <script type=""  src="http://code.jquery.com/jquery-latest.js"></script>
+                <SCRIPT type="text/javascript"  language="javascript">
+                    var i=2;
 
-        <title>Ingresar Compra</title>
+                    $(document).ready(function(){
+                        if (<%=Contador%> == 1 ){
+                            $( "#botonAdd" ).hide();
+                        }
+                    });
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.js"></script>
-    <script type="text/javascript">
+                    $(document).delegate(".producto", "change", function(){
+                        var selected = new Array();
+                        $(".producto").each(function(){
+                            selected.push($(this).find(':selected').val());
+                            $(this).find('option').show();
+                        });
+                        $(".producto").each(function(){
+                            var option = $(this);
+                            selected.forEach(function(select)
+                            {
+                                option.find('option[value=' + select +']').hide();
+                            });
+                        });
 
-    function ObtenerSeleccion(elemento){
-    var id_seleccion = elemento.selectedIndex;
-    }
-    </script>
+                    });
 
-    </head>
-    <body>
-        <center>
-            <h1>Ingresar Compra</h1>
-        </center>
+                    function addMore() {
+                        $('#form').append("Producto "+i+":");
+                        $('#form').append($("#producto1").clone().attr("name","producto"+i).attr("id","producto"+i));
+                        $('#form').append('<br />');
+                        $('#form').append('Cantidad: <input type="text" class = "cantidad" name="cantidad'+i+'" id="cantidad"/>');
+                        $('#form').append('<br />');
+                        $('#form').append('Precio: <input type="text" class = "precio" name="precio'+i+'" placeholder="Precio"/>');
+                        $('#form').append('<br />');
+                        $('#form').append($('.submits'));
+                        $('#Contador').attr("value", i);
 
-    <script type="text/javascript">
-    function addRowToTable()
-    {
-      var tbl = document.getElementById('tblSample');
-      var rows = tbl.getElementsByTagName('tr');
-      var l = rows.length;
-      var lastRow = rows[l-1];
-      var clone = lastRow.cloneNode(true);
+                        i++;
+                        if (i > <%=Contador%> ){
+                            $( "#botonAdd" ).hide();
+                        }
+                    };
+                </SCRIPT>
+	</head>
+	<body>
 
-      clone.getElementsByTagName('select')[0].selectedIndex = lastRow.getElementsByTagName('select')[0].selectedIndex;
-      clone.getElementsByTagName('select')[0].name = 'action'+l;
-      tbl.appendChild(clone);
-    }
-    </script>
-    </head>
-    <body>
-    <form action="../../IngresarCompra" method="post" autocomplete="on" >
-    <table id="tblSample" style='border: 4px groove #666666; margin-left: auto; margin-right: auto; '>
-      <tr>
-            <td>
-            <select name="action1" onChange="ObtenerSeleccion(this);">
-                <option value="0">Seleccione uno de los productos</option>
+                            <%
+                    if(session.getAttribute("tipoUsuario") != null)
+                    { %>
 
-            <% Registro poto = new Registro();
-               for ( Registro temp: poto.MostrarProductos()){
-            %>
-               <option value="<%= temp.getId_producto() %>" ><%= temp.getNombreProducto() %> </option>
-            <%}%>
-        </select>
-        </td>
-     <TD> <INPUT name="Cantidad" placeholder="Ingrese cantidad" type="text" /> </TD>
+                        <div id="status">
+                            <table border="1px">
+                                <tbody>
+                                    <tr>
+                                        <p id="bienvenido"><b>Bienvenido: </b> <% out.print(session.getAttribute("Usuario"));  %> </p>
+                                        <center>
+                                                <td>
+                                            <a id="logout"  href="../../Controller/Session/closeSession.jsp"> Logout </a>
+                                            </td>
+                                            <td>
+                                                <% if(session.getAttribute("tipoUsuario").equals("administrador")){ %>
+                                                    <a id="linkadmin" href="../../Views/Administrador/Administrador.jsp"> Administrador</a>
+                                               <% } %>
 
-     <TD> <INPUT placeholder="Precio" type="text" /> </TD>
-      </tr>
-    </table>
+                                               <%   if(session.getAttribute("tipoUsuario").equals("vendedor")) { %>
+                                                     <a id="linkadmin" href="../../Views/Vendedor/Vendedor.jsp"> Vendedor </a>
+                                               <%} %>
 
-    <br/>
-    <p style="text-align: center; ">
-    <input type="button" value="Add Another" onclick="addRowToTable(); " />
 
-    </p>
-    <p style='text-align: center; '><input type='submit' value='Submit Request' /></p>
-    </form>
-    </body>
+                                            </td>
+                                        </center>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                <%  }
+
+                else{
+                    JOptionPane.showMessageDialog(null, "Usuario invalido ");
+                    response.sendRedirect("../../index.jsp");
+                }
+
+    %>
+
+		<div id="content">
+			<form style="text-align:center;" id="form" action="../../IngresarCompra" method="post">
+
+				Producto: <select  class = "producto" name ="producto1" id="producto1">
+                                            <option selected></option>
+                                            <%=htmlProductos%>
+                                          </select>
+				<br />
+				Cantidad: <input type="text" class = "cantidad" name="cantidad1" placeholder="Cantidad" />
+				<br />
+				Precio: <input type="text" class = "precio" name="precio1" placeholder="Precio"/>
+                                <br />
+                                <input type="hidden" name ="Contador" value="1" id="Contador"/>
+				<input type="submit" class = "submits" value="Finalizar" />
+			</form>
+                        <button id="botonAdd"class="boton" onclick="addMore()">Agregar otro producto</button>
+
+		</div>
+	</body>
 </html>

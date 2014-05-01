@@ -1,10 +1,10 @@
 SMAP
-IngrCompra_jsp.java
+test_jsp.java
 JSP
 *S JSP
 *F
-+ 0 IngrCompra.jsp
-Views/Administrador/IngrCompra.jsp
++ 0 test.jsp
+Views/Administrador/test.jsp
 *L
 1,2:47
 4,13:50

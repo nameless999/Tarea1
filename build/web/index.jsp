@@ -3,8 +3,7 @@
     Created on : Apr 16, 2014, 4:22:06 PM
     Author     : nameless999
 --%>
-<%@page import="Modelo.HoraFecha"%>
-<%@page import="Controller.HoraFecha"%>
+
 <%@page import="Modelo.Usuario"%>
 <%@page import="Modelo.Registro"%>
 <%@page contentType="java" pageEncoding="UTF-8"%>
@@ -13,6 +12,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Pepe's Works</title>
+        <link rel="stylesheet" type="text/css" href="Resources/css/Formulario/Formulario_1.css" />
+        <link href="Resources/css/index.css" rel="stylesheet" type="text/css">
+        <link href="Resources/css/Tablas/TablaProductos.css" rel="stylesheet" type="text/css">
         <link href="Resources/css/index.css" rel="stylesheet" type="text/css">
         <link href="Resources/css/Login/Login.css" rel="stylesheet" type="text/css">
         <link href="Views/Session/SetAttribute.jsp" >
@@ -21,9 +23,7 @@
     </head>
     <body>
 
-       <%
- 
-       %>
+
         <div id="wrap">
 
             <div id="head">
@@ -64,9 +64,7 @@
                 <%  } %>
 
             </div>
-                <% HoraFecha Date= new HoraFecha();
-                   Date.main();
-                %>
+
               			<div id="box">
 			<div class="elements">
 			<div class="avatar"></div>

@@ -8,11 +8,14 @@ package Controller;
 import Modelo.Registro;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
+import javax.swing.JOptionPane;
 /**
  *
  * @author nameless999
@@ -32,10 +35,41 @@ public class IngresarCompra extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
 
+            HttpSession session = request.getSession();
+            Calendar fecha = new GregorianCalendar();
+            int year = fecha.get(Calendar.YEAR);
+            int mes = fecha.get(Calendar.MONTH)+1;
+            int dia = fecha.get(Calendar.DAY_OF_MONTH);
+            int hora = fecha.get(Calendar.HOUR_OF_DAY);
+            int minuto = fecha.get(Calendar.MINUTE);
+            int segundo = fecha.get(Calendar.SECOND);
+            String date = dia+"/"+mes+"/"+year;
+            String hour = hora+":"+(minuto < 10 ? "0"+minuto : minuto)+":"+(segundo < 10 ? "0"+segundo : segundo);
+            int i;
+
+ 
+            String Contador = request.getParameter("Contador");
+            session.setAttribute("Contador", Contador);
+            Registro ingCompra = new Registro();
+            int montoTotal;
+            JOptionPane.showMessageDialog(null, Contador);
+            for(i=1; i <= Integer.parseInt((String) request.getParameter("Contador")); i++ ){
+                montoTotal = Integer.parseInt(request.getParameter("precio"+i))* Integer.parseInt(request.getParameter("cantidad"+i));
+                ingCompra.IngresarCompra(Integer.parseInt((String) request.getParameter("producto"+i)), montoTotal, date , hour);
+                session.setAttribute("producto"+i, Integer.parseInt((String) request.getParameter("producto"+i)));
+                session.setAttribute("montoTotal"+i, montoTotal);
+                session.setAttribute("precio"+i,  Integer.parseInt(request.getParameter("precio"+i)));
+                ingCompra.ObtenerProductoid(Integer.parseInt((String) request.getParameter("producto"+i)));
+                session.setAttribute("id_producto"+i, ingCompra.getId_producto());
+            }
 
 
-           Registro Producto = new Registro();
-           Producto.ObtenerProductoid("idProducto");
+
+            session.setAttribute("date", date);
+            session.setAttribute("hour", hour);
+            JOptionPane.showMessageDialog(null, "Compra ingresada exitosamente");
+            response.sendRedirect("Views/Administrador/ResultadosCompras.jsp");
+            //ingCompra.IngresarCompra(hora, minuto, dma, dma);
 
         } finally { 
             out.close();

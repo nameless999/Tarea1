@@ -249,28 +249,52 @@ public void IngresarCliente(String rut, String nombre){
             ex.printStackTrace();
         }
     }
-    public void IngresarCompra(String nombreProducto, int Cantidad, int Precio ){
-    String sql = "Insert into Compra values(?,?,?,?,?,?)";
+    public void IngresarCompra(int id_compra, int montoTotal, String Fecha, String Hora){
+    String sql = "Insert into Compra values(?,?,?,?)";
 
     try
         {
             Class.forName(classfor);
             con=DriverManager.getConnection(url, usuario, clave);
             pr=con.prepareStatement(sql);
-            pr.setInt(1, id_producto);
-            pr.setInt(2, stock);
-            pr.setString(3, descripcion);
-            pr.setString(4, categoria);
-            pr.setInt(5, precio);
-            pr.setString(6, nombre);
+
+            pr.setInt(1, id_compra);
+            pr.setInt(2, montoTotal);
+            pr.setString(3, Fecha);
+            pr.setString(4, Hora);
             pr.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Producto añadido exitosamente");
+            JOptionPane.showMessageDialog(null, "Compra añadida exitosamente");
         }
 
    catch(Exception ev)
    {}
  }
+    
+      public void IngresarDetalleCompra(int id_detalle, int id_compra, int id_producto, int cantidad, int precio){
+    String sql = "Insert into Detalle_Compra values(?,?,?,?,?)";
+
+    try
+        {
+            Class.forName(classfor);
+            con=DriverManager.getConnection(url, usuario, clave);
+            pr=con.prepareStatement(sql);
+ 
+            pr.setInt(1, id_detalle);
+            pr.setInt(2, id_compra);
+            pr.setInt(3, id_producto);
+            pr.setInt(4, cantidad);
+            pr.setInt(5, precio);
+
+            pr.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Compra añadida exitosamente");
+        }
+
+   catch(Exception ev)
+   {}
+ }
+
 
 
 

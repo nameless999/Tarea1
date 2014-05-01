@@ -4,6 +4,7 @@
     Author     : nameless999
 --%>
 
+<%@page import="javax.swing.JOptionPane"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,39 +15,64 @@
         <title>Menú Administrador</title>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Creative CSS3 Animation Menus" />
-        <meta name="keywords" content="menu, navigation, animation, transition, transform, rotate, css3, web design, component, icon, slide" />
-        <meta name="author" content="Codrops" />
+ 
+
+
         <link rel="shortcut icon" href="../favicon.ico">
         <link href="../../Resources/css/index.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="../../Resources/css/Menu/Menu.css" />
         <link rel="stylesheet" type="text/css" href="../../Resources/css/Menu/reset.css" />
+        <link rel="stylesheet" type="text/css" href="../../Resources/css/Formulario/Formulario.css" />
+        <link href="../../Resources/css/index.css" rel="stylesheet" type="text/css">
+        <link href="../../Resources/css/Tablas/TablaProductos.css" rel="stylesheet" type="text/css">
         <link href='http://fonts.googleapis.com/css?family=Terminal+Dosis' rel='stylesheet' type='text/css' />
     </head>
     <body>
 
-        <div id="status">
-            <table border="1px">
-                <tbody>
-                    <tr>
-                        <p id="bienvenido"><b></b> <% out.print(session.getAttribute("Usuario"));  %> </p>
-                        <center>
-                            <td>
-                            <a id="logout"  href="../../Controller/Session/closeSession.jsp"> Logout </a>
-                            </td>
-                            <td>
-                                <a id="linkadmin" href="../../index.jsp"> Home </a>
-                            </td>
-                        </center>
 
-                    </tr>
-                </tbody>
-            </table>
-        </div>
 
         <div class="container">
-            <h1>Bienvenido <%= session.getAttribute("Usuario") %></h1>
+            <h1>Menú Administrador</h1>
+
+                              <%
+                    if(session.getAttribute("tipoUsuario") != null)
+                    { %>
+
+                        <div id="status">
+                            <table border="1px">
+                                <tbody>
+                                    <tr>
+                                        <p id="bienvenido"><b>Bienvenido: </b> <% out.print(session.getAttribute("Usuario"));  %> </p>
+                                        <center>
+                                                <td>
+                                            <a id="logout"  href="../../Controller/Session/closeSession.jsp"> Logout </a>
+                                            </td>
+                                            <td>
+                                                <% if(session.getAttribute("tipoUsuario").equals("administrador")){ %>
+                                                    <a id="linkadmin" href="Administrador.jsp"> Administrador</a>
+                                               <% } %>
+
+                                               <%   if(session.getAttribute("tipoUsuario").equals("vendedor")) { %>
+                                                     <a id="linkadmin" href="Views/Vendedor/Vendedor.jsp"> Vendedor </a>
+                                               <%} %>
+
+
+                                            </td>
+                                        </center>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                <%  }
+
+                else{
+                    JOptionPane.showMessageDialog(null, "Usuario invalido ");
+                    response.sendRedirect("../../index.jsp");
+                }
+
+    %>
 
             <div class="content">
                 <ul class="ca-menu">
