@@ -27,8 +27,8 @@ public class Registro
     private String categoria;
     private int precio;
     private String nombreProducto;
-
-
+    private int NumRowsDetalleCompra;
+    private int NumRowsCompra;
 
     private String classfor="oracle.jdbc.driver.OracleDriver";
     private String url="jdbc:oracle:thin:@localhost:1521:XE";
@@ -279,24 +279,65 @@ public void IngresarCliente(String rut, String nombre){
             Class.forName(classfor);
             con=DriverManager.getConnection(url, usuario, clave);
             pr=con.prepareStatement(sql);
- 
+
             pr.setInt(1, id_detalle);
+
             pr.setInt(2, id_compra);
+
             pr.setInt(3, id_producto);
+
             pr.setInt(4, cantidad);
+
             pr.setInt(5, precio);
 
             pr.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Compra añadida exitosamente");
+            
         }
 
    catch(Exception ev)
    {}
  }
 
+    public void NumRowsDetalleCompra(){
 
+    String sql= "SELECT COUNT(*) AS total FROM Detalle_compra";
 
+    try
+        {
+            Class.forName(classfor);
+            con=DriverManager.getConnection(url, usuario, clave);
+            pr=con.prepareStatement(sql);
+            rs=pr.executeQuery();
+            rs.next();
+            setNumRowsDetalleCompra(rs.getInt("total"));
+            JOptionPane.showMessageDialog(null, getNumRowsDetalleCompra());
+        }
+
+    catch(Exception ev)
+   {}
+
+    }
+
+    public void NumRowsCompra(){
+
+    String sql= "SELECT COUNT(*) AS total FROM compra";
+
+    try
+        {
+            Class.forName(classfor);
+            con=DriverManager.getConnection(url, usuario, clave);
+            pr=con.prepareStatement(sql);
+            rs=pr.executeQuery();
+            rs.next();
+            setNumRowsDetalleCompra(rs.getInt("total"));
+            JOptionPane.showMessageDialog(null, getNumRowsDetalleCompra());
+        }
+
+    catch(Exception ev)
+   {}
+
+    }
 
     public String getNombre() {
         return nombre;
@@ -368,6 +409,22 @@ public void IngresarCliente(String rut, String nombre){
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public int getNumRowsDetalleCompra() {
+        return NumRowsDetalleCompra;
+    }
+
+    public void setNumRowsDetalleCompra(int NumRowsDetalleCompra) {
+        this.NumRowsDetalleCompra = NumRowsDetalleCompra;
+    }
+
+    public int getNumRowsCompra() {
+        return NumRowsCompra;
+    }
+
+    public void setNumRowsCompra(int NumRowsCompra) {
+        this.NumRowsCompra = NumRowsCompra;
     }
 
 

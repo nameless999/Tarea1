@@ -8,6 +8,7 @@
     {
         Contador++;
         htmlProductos+="<option value= \""+temp.getId_producto()+"\">"+temp.getNombreProducto()+"</option>\n";
+     
     }
 
     if (htmlProductos.equals("")){
@@ -50,9 +51,11 @@
                         $('#form').append("Producto "+i+":");
                         $('#form').append($("#producto1").clone().attr("name","producto"+i).attr("id","producto"+i));
                         $('#form').append('<br />');
-                        $('#form').append('Cantidad: <input type="text" class = "cantidad" name="cantidad'+i+'" id="cantidad"/>');
+
+                        $('#form').append('Cantidad: <input type="text" class = "cantidad" name="cantidad'+i+'" placeholder="Cantidad" id="cantidad"/>');
                         $('#form').append('<br />');
                         $('#form').append('Precio: <input type="text" class = "precio" name="precio'+i+'" placeholder="Precio"/>');
+
                         $('#form').append('<br />');
                         $('#form').append($('.submits'));
                         $('#Contador').attr("value", i);
@@ -111,7 +114,8 @@
 
 				Producto: <select  class = "producto" name ="producto1" id="producto1">
                                             <option selected></option>
-                                            <%=htmlProductos%>
+                                            <%=htmlProductos %>
+
                                           </select>
 				<br />
 				Cantidad: <input type="text" class = "cantidad" name="cantidad1" placeholder="Cantidad" />

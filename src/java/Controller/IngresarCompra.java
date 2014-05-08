@@ -52,15 +52,20 @@ public class IngresarCompra extends HttpServlet {
             session.setAttribute("Contador", Contador);
             Registro ingCompra = new Registro();
             int montoTotal;
-            JOptionPane.showMessageDialog(null, Contador);
+            ingCompra.NumRowsDetalleCompra();
+            ingCompra.NumRowsCompra();
             for(i=1; i <= Integer.parseInt((String) request.getParameter("Contador")); i++ ){
+
                 montoTotal = Integer.parseInt(request.getParameter("precio"+i))* Integer.parseInt(request.getParameter("cantidad"+i));
-                ingCompra.IngresarCompra(Integer.parseInt((String) request.getParameter("producto"+i)), montoTotal, date , hour);
+                
+                
+                ingCompra.IngresarCompra(ingCompra.getNumRowsCompra()+1, montoTotal, date , hour);
+                ingCompra.IngresarDetalleCompra(ingCompra.getNumRowsDetalleCompra()+1, ingCompra.getNumRowsDetalleCompra()+1,Integer.parseInt(request.getParameter("producto"+i)), Integer.parseInt(request.getParameter("cantidad"+i)) ,Integer.parseInt(request.getParameter("precio"+i)));
+
                 session.setAttribute("producto"+i, Integer.parseInt((String) request.getParameter("producto"+i)));
                 session.setAttribute("montoTotal"+i, montoTotal);
                 session.setAttribute("precio"+i,  Integer.parseInt(request.getParameter("precio"+i)));
-                ingCompra.ObtenerProductoid(Integer.parseInt((String) request.getParameter("producto"+i)));
-                session.setAttribute("id_producto"+i, ingCompra.getId_producto());
+                    
             }
 
 

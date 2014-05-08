@@ -4,6 +4,7 @@
     Author     : nameless999
 --%>
 
+<%@page import="javax.swing.JOptionPane"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
@@ -113,7 +114,7 @@
 
                           </div>
                               <form action="IngrCompra.jsp" method="post">
-                                    <button type='submit' name="editar"> Volver </button>
+                                    <button type='submit' name="volver"> Volver </button>
                              </form>
                              </center>
     </body>
